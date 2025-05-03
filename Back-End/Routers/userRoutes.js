@@ -1,6 +1,6 @@
 // routes/profileRoutes.js
 const express = require('express');
-const { verifyToken } = require('../middleware/authMiddleware');
+const { verifyToken } = require('../Middleware/authMiddleware');
 const {
     getUserProfile,
     addFavoriteCountry,

@@ -4,7 +4,7 @@ import { CountryProvider } from './context/CountryContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './Pages/HomePage';
-import CountryDetailPage from './pages/CountryDetailPage';
+import CountryDetailPage from './Pages/CountryDetailPage';
 import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
 import ProfilePage from './Pages/ProfilePage';
