@@ -49,3 +49,33 @@ jobs:
           --build-arg NODE_ENV=${{ secrets.NODE_ENV }} \
           -t gaya2001/mern-backend:latest .
         docker push gaya2001/mern-backend:latest
+
+    # Step 6: Deploy to DigitalOcean Droplet
+    - name: Deploy to DigitalOcean Droplet
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.DO_SSH_PRIVATE_KEY }}
+        SSH_HOST: ${{ secrets.DO_SSH_HOST }}
+        SSH_USERNAME: ${{ secrets.DO_SSH_USERNAME }}
+      run: |
+        # Set up SSH key
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+        # Add DigitalOcean's SSH fingerprint to known hosts (to avoid "Are you sure you want to continue" prompt)
+        ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+
+        # SSH into Droplet and pull latest Docker images
+        ssh -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
+          # Pull the latest images from Docker Hub
+          docker pull gaya2001/mern-frontend:latest
+          docker pull gaya2001/mern-backend:latest
+
+          # Stop and remove existing containers (if any)
+          docker stop frontend-container backend-container || true
+          docker rm frontend-container backend-container || true
+
+          # Run the new containers with the updated images
+          docker run -d --name frontend-container -p 5173:5173 gaya2001/mern-frontend:latest
+          docker run -d --name backend-container -p 6001:6001 gaya2001/mern-backend:latest
+        EOF
