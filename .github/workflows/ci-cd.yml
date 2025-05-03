@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for MERN Stack
+name: CI/CD Pipeline for REST-API-Countries
 
 on:
   push:
