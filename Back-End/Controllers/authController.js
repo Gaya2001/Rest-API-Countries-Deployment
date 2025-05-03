@@ -4,6 +4,10 @@ const User = require('../Models/User');
 
 // Register controller
 const registerUser = async (req, res) => {
+
+    console.log('Registering user:', req.body); // Debugging line
+
+
     try {
         const { username, email, password } = req.body;
 
@@ -58,6 +62,8 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        console.log('Login attempt:', req.body); // Debugging line
 
         // Find user by email
         const user = await User.findOne({ email });
