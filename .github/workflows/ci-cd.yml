@@ -1,0 +1,51 @@
+name: CI/CD Pipeline for MERN Stack
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main  
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Step 1: Checkout the repository code
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    # Step 2: Set up Docker Buildx (for multi-platform support)
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    # Step 3: Log in to Docker Hub
+    - name: Log into Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Step 4: Build and Push Frontend Docker Image
+    - name: Build and Push Frontend Docker Images
+      working-directory: ./Front-End
+      run: |
+        docker build \
+          --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} \
+          --build-arg VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }} \
+          -t gaya2001/mern-frontend:latest .
+        docker push gaya2001/mern-frontend:latest
+
+    # Step 5: Build and Push Backend Docker Image
+    - name: Build and Push Backend Docker Image
+      working-directory: ./Back-End
+      run: |
+        docker build \
+          --build-arg MONGO_URI=${{ secrets.MONGO_URI }} \
+          --build-arg PORT=${{ secrets.PORT }} \
+          --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
+          --build-arg NODE_ENV=${{ secrets.NODE_ENV }} \
+          -t gaya2001/mern-backend:latest .
+        docker push gaya2001/mern-backend:latest
