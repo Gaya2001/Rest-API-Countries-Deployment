@@ -1,0 +1,15 @@
+{
+  "name": "rest-api-countries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-frontend": "cd Front-End && npm install",
+    "start-frontend": "cd Front-End && npm run dev",
+    "install-server": "cd Back-End && npm install",
+    "start-server": "cd Back-End && npm start"
+  },
+  "author": "",
+  "license": "ISC"
+}

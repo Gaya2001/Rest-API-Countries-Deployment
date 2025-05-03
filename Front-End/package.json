@@ -10,8 +10,7 @@
     "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "start-frontend": "cd Front-End && npm install && npm run dev"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "axios": "^1.9.0",
