@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./Routers/authRoutes');
 const userRoutes = require('./Routers/userRoutes');
@@ -17,16 +16,12 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const __dirname = path.resolve();
 
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 
-app.use(express.static(path.join(__dirname, '/Front-End/dist')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Front-End', 'dist', 'index.html'));
-});
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
