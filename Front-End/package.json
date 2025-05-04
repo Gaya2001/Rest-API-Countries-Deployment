@@ -5,13 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "start": "node Back-End/server.js",
-    "build": "npm install &&  npm install --prefix Front-End && npm run build --prefix Front-End"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "axios": "^1.9.0",

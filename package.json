@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-frontend": "cd Front-End && npm install",
-    "start-frontend": "cd Front-End && npm run dev",
-    "install-server": "cd Back-End && npm install",
-    "start-server": "cd Back-End && npm start"
+    "start": "node Back-End/server.js",
+    "build": "npm install &&  npm install --prefix Front-End && npm run build --prefix Front-End"
   },
   "author": "",
   "license": "ISC"
