@@ -1,6 +1,4 @@
-// controllers/profileController.js
-const User = require('../Models/User');
-
+import User from '../Models/User.js';
 
 
 // Get user profile
@@ -183,4 +181,4 @@ const updateUserProfile = async (req, res) => {
 
 
 
-module.exports = { getUserProfile, addFavoriteCountry, removeFavoriteCountry, getFavoriteCountries, updateUserProfile };
+export { getUserProfile, addFavoriteCountry, removeFavoriteCountry, getFavoriteCountries, updateUserProfile };

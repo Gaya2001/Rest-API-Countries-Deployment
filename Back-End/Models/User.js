@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// models/User.js
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -50,4 +51,5 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+// Use ES module export
+export default User;

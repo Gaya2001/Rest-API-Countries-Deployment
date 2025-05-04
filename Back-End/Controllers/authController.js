@@ -1,6 +1,7 @@
 // controllers/authController.js
-const jwt = require('jsonwebtoken');
-const User = require('../Models/User');
+import User from '../Models/User.js';
+import jwt from 'jsonwebtoken';
+
 
 // Register controller
 const registerUser = async (req, res) => {
@@ -125,4 +126,4 @@ const logoutUser = (req, res) => {
     });
 };
 
-module.exports = { registerUser, loginUser, logoutUser };
+export { registerUser, loginUser, logoutUser };

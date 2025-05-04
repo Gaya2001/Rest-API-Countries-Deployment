@@ -1,13 +1,13 @@
-// routes/profileRoutes.js
-const express = require('express');
-const { verifyToken } = require('../Middleware/authMiddleware');
-const {
+// routes/userRoutes.js
+import express from 'express';
+import { verifyToken } from '../Middleware/authMiddleware.js';
+import {
     getUserProfile,
     addFavoriteCountry,
     removeFavoriteCountry,
     getFavoriteCountries,
     updateUserProfile
-} = require('../Controllers/userController');
+} from '../Controllers/userController.js';
 
 const router = express.Router();
 
@@ -26,6 +26,8 @@ router.delete('/favorites/:countryCode', removeFavoriteCountry);
 // Get all favorite countries
 router.get('/getall/favorite', getFavoriteCountries);
 
-router.put('/profile', updateUserProfile); // Update user profile);
+// Update user profile
+router.put('/profile', updateUserProfile);
 
-module.exports = router;
+// Export router using ES module syntax
+export default router;

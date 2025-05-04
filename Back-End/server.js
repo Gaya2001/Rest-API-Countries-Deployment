@@ -1,10 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
-const authRoutes = require('./Routers/authRoutes');
-const userRoutes = require('./Routers/userRoutes');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import authRoutes from './Routers/authRoutes.js';
+import userRoutes from './Routers/userRoutes.js';
+import path from 'path';
 
 dotenv.config();
 const app = express();
@@ -16,10 +17,22 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-
-
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+
+// Correct the directory spelling here
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/Front-End/dist')));
+
+
+
+
+// Fallback route for React/Vue/SPA rendering - FIXED with named wildcard parameter
+app.get('/*path', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Front-End', 'dist', 'index.html'));
+});
+
+
 
 
 
